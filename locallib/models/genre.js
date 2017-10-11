@@ -2,14 +2,17 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var GenreSchema = Schema({
-    name:{type:String,min:3,max:100, required:true}
+var genreSchema = new Schema({
+    name:{type:String,required:true, minlength:3,maxlength:100}
+
 });
 
-GenreSchema
-.virtual('url')
-.get(function(){
-    return '/catalog/genre/' + this._id;
+//virtual for genre url
+genreSchema
+    .virtual('url')
+    .get(function(){
+        return '/catalog/genre/' + this._id;
 });
 
-module.exports = mongoose.model('Genre',GenreSchema);
+//Exporting model
+module.exports = mongoose.model('Genre',genreSchema);
