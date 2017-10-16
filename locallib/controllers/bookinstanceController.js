@@ -4,6 +4,7 @@ var BookInstance = require('../models/bookinstance');
 exports.bookinstance_list = function (req, res, next) {
 
     BookInstance.find()
+        .sort([['status','asc']])
         .populate('book')
         .exec(function (err, list_bookinstances) {
             if (err) { return next(err); }
